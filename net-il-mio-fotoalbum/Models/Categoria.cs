@@ -6,8 +6,6 @@
 
         public string Name { get; set; } = string.Empty;
 
-        public int? FotoId { get; set; }
-
-        public Foto? Foto { get; set; }
+        public IEnumerable<Foto>? Fotos { get; set; }
     }
 }

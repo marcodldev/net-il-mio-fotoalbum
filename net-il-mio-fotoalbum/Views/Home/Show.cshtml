@@ -37,7 +37,7 @@
 <div>
 
     <div class="p-3">
-        <form asp-controller="Foto" asp-action="Delete" asp-route-id="@foto.Id" method="post">
+        <form asp-controller="Home" asp-action="Delete" asp-route-id="@foto.Id" method="post">
             @Html.AntiForgeryToken()
             <button type="submit" class="btn btn-danger btn-lg">
                 Elimina
@@ -47,12 +47,6 @@
     </div>
 
     <div class="p-3">
-        <form asp-controller="Foto" asp-action="Update" asp-route-id="@foto.Id" method="get">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-danger btn-lg">
-                Modifica
-            </button>
-
-        </form>
+        <a class="btn btn-danger btn-lg" href="@Url.Action("Update","Home", new{Id = @foto.Id})">Modifica</a>
     </div>
 </div>

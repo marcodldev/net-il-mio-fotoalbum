@@ -63,7 +63,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
 
 
-        // CREATE
+        //_______________________ CREATE  ________________________\\
 
         //[Authorize(Roles = "ADMIN")]
         [HttpGet]
@@ -155,6 +155,135 @@ namespace net_il_mio_fotoalbum.Controllers
             }
         }
 
+        //_______________________ EDIT  ________________________\\
 
+
+
+        //[Authorize(Roles = "ADMIN")]
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+                Foto fotoEdit = ctx.Fotos.Include(p => p.Categorie).Where(foto => foto.Id == Id).FirstOrDefault();
+
+                if (fotoEdit == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    List<Categoria> categorie = ctx.Categorie.ToList();
+
+                    List<SelectListItem> listCategorie = new List<SelectListItem>();
+
+                    foreach (Categoria categoria in categorie)
+                    {
+                        listCategorie.Add(new SelectListItem()
+                        {
+                            Text = categoria.Name,
+                            Value = categoria.Id.ToString(),
+                            Selected = fotoEdit.Categorie.Any(i => i.Id == categoria.Id)
+                        });
+                    }
+
+                    FotoFormModel model = new FotoFormModel();
+                    model.Foto = fotoEdit;
+                    model.CategorieSelezionabili = listCategorie;
+
+                    return View("Edit", model);
+                }
+            }
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int Id, FotoFormModel form)
+        {
+            if (!ModelState.IsValid)
+            {
+                using (FotoContext ctx = new FotoContext())
+                {
+
+                    List<Categoria> categorie = ctx.Categorie.ToList();
+                    List<SelectListItem> listCategorie = new List<SelectListItem>();
+
+                    foreach (Categoria categoria in categorie)
+                    {
+                        listCategorie.Add(new SelectListItem()
+                        {
+                            Text = categoria.Name,
+                            Value = categoria.Id.ToString(),
+                        });
+                    }
+
+                    form.Foto = ctx.Fotos.Where(foto => foto.Id == Id).FirstOrDefault();
+                    form.CategorieSelezionabili = listCategorie;
+
+                    return View("Edit", form);
+                }
+            }
+
+            string url = "/img/";
+
+            using (FotoContext ctx = new FotoContext())
+            {
+                Foto fotoEdit = ctx.Fotos.Include(p => p.Categorie).Where(foto => foto.Id == Id).FirstOrDefault();
+
+                if (fotoEdit != null)
+                {
+                    fotoEdit.Title = form.Foto.Title;
+                    fotoEdit.Description = form.Foto.Description;
+                    fotoEdit.Url = url + form.Foto.Url;
+
+                    fotoEdit.Categorie.Clear();
+
+                    if (form.CategorieSelezionate != null)
+                    {
+                        foreach (string selectedCategoriaId in form.CategorieSelezionate)
+                        {
+                            int selectedIntCategoriaInt = int.Parse(selectedCategoriaId);
+                            Categoria ingrediente = ctx.Categorie.Where(i => i.Id == selectedIntCategoriaInt).FirstOrDefault();
+                            fotoEdit.Categorie.Add(ingrediente);
+                        }
+                    }
+
+                    ctx.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
+
+        //_______________________ DELETE  ________________________\\
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int Id)
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+                Foto fotoDelete = ctx.Fotos.Where(foto => foto.Id == Id).FirstOrDefault();
+
+                if (fotoDelete != null)
+                {
+                    ctx.Fotos.Remove(fotoDelete);
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
     }
 }

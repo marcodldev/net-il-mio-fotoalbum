@@ -1,13 +1,54 @@
-﻿<!DOCTYPE html>
+﻿@model FotoFormModel
+@{
+    Layout = "_Layout";
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-</head>
-<body>
-    <div>
-        @RenderBody()
-    </div>
-</body>
-</html>
+}
+
+<div class="container">
+    <h1 class="text-center text-light">Modifica la foto</h1>
+
+    <form asp-controller="Home" asp-action="Update" asp-route-id="@Model.Foto.Id" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group p-2">
+            <label asp-for="Foto.Title" class="control-label text-light">Nome</label>
+            <input asp-for="Foto.Title" class="form-control" value="@Model.Foto.Title" />
+            <span asp-validation-for="Foto.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Foto.Description" class="control-label text-light">Descrizione</label>
+            <textarea asp-for="Foto.Description" class="form-control">@Model.Foto.Description</textarea>
+            <span asp-validation-for="Foto.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Foto.Url" class="control-label text-light">Scegli l'immagine</label>
+            <input asp-for="Foto.Url" type="file" class="form-control-file" />
+            <span asp-validation-for="Foto.Url" class="text-danger"></span>
+        </div>
+
+        <div class="my-2 text-light">
+            <h2>Modifica le categorie:</h2>
+            @foreach (SelectListItem categoria in Model.CategorieSelezionabili)
+            {
+
+                <div class="form-check">
+
+                    <input class="form-check-input" type="checkbox"
+                           checked="@categoria.Selected" name="CategorieSelezionate"
+                           value="@categoria.Value" id="@categoria.Text">
+
+                    <label class="form-check-label" for="@categoria.Text">
+                        @categoria.Text
+                    </label>
+
+                </div>
+
+
+            }
+
+        </div>
+        <div class="form-group p-2">
+            <input type="submit" value="Salva" class="btn btn-danger btn-lg p-2 m-2" />
+        </div>
+    </form>
+</div>

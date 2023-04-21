@@ -8,11 +8,10 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     
-    
-
-
-
+   
 </div>
+
+<a class="btn btn-danger btn-lg p-2 m-4" href="@Url.Action("Create","Home")">Inserisci una nuova foto</a>
 
 <div>
 
@@ -26,7 +25,6 @@
                     <div class="card-body">
                         <h5 class="card-name">@foto.Title</h5>
                         <p class="card-text">@foto.Description</p>
-                        @* <p class="card-text">@foto.Categorie.Nome</p>*@
                         <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Home", new{Id = @foto.Id})">Dettagli</a>
 
                     </div>

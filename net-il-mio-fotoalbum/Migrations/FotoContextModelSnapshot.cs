@@ -22,6 +22,21 @@ namespace net_il_mio_fotoalbum.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CategoriaFoto", b =>
+                {
+                    b.Property<int>("CategorieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FotosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CategorieId", "FotosId");
+
+                    b.HasIndex("FotosId");
+
+                    b.ToTable("CategoriaFoto");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -228,16 +243,11 @@ namespace net_il_mio_fotoalbum.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("FotoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FotoId");
 
                     b.ToTable("Categorie");
                 });
@@ -268,6 +278,21 @@ namespace net_il_mio_fotoalbum.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Fotos");
+                });
+
+            modelBuilder.Entity("CategoriaFoto", b =>
+                {
+                    b.HasOne("net_il_mio_fotoalbum.Models.Categoria", null)
+                        .WithMany()
+                        .HasForeignKey("CategorieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("net_il_mio_fotoalbum.Models.Foto", null)
+                        .WithMany()
+                        .HasForeignKey("FotosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,20 +344,6 @@ namespace net_il_mio_fotoalbum.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Categoria", b =>
-                {
-                    b.HasOne("net_il_mio_fotoalbum.Models.Foto", "Foto")
-                        .WithMany("Categorie")
-                        .HasForeignKey("FotoId");
-
-                    b.Navigation("Foto");
-                });
-
-            modelBuilder.Entity("net_il_mio_fotoalbum.Models.Foto", b =>
-                {
-                    b.Navigation("Categorie");
                 });
 #pragma warning restore 612, 618
         }
