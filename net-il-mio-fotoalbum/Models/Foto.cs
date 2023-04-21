@@ -2,6 +2,16 @@
 {
     public class Foto
     {
+        public Foto(string title, string description, string url, bool visible)
+        {
+            Title = title;
+            Description = description;
+            Url = url;
+            Visible = visible;
+        }
+
+        public Foto() { }
+
         public int Id { get; set; }
 
         public string Title { get; set; } = string.Empty;

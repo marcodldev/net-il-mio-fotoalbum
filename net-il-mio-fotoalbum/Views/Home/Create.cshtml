@@ -1,0 +1,56 @@
+﻿@model FotoFormModel
+@{
+    Layout = "_Layout";
+
+    var fotos = Model;
+
+}
+
+<div class="container">
+    <h1 class="text-center text-light">Inserisci una nuova foto</h1>
+
+    <form asp-controller="Home" asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group p-2">
+            <label asp-for="Foto.Title" class="control-label text-light">Titolo</label>
+            <input asp-for="Foto.Title" class="form-control " />
+            <span asp-validation-for="Foto.Title" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Foto.Description" class="control-label text-light">Descrizione</label>
+            <textarea asp-for="Foto.Description" class="form-control "></textarea>
+            <span asp-validation-for="Foto.Description" class="text-danger"></span>
+        </div>
+        <div class="form-group p-2">
+            <label asp-for="Foto.Url" class="control-label text-light">Scegli l'immagine</label>
+            <input asp-for="Foto.Url" type="file" class="form-control-file " />
+            <span asp-validation-for="Foto.Url" class="text-danger"></span>
+        </div>
+
+        <p class="text-light">Categoria:</p>
+     
+
+            <div class="my-2 text-light">
+                <h2>Inserisci gli ingredienti:</h2>
+                @foreach (var categoria in fotos.CategorieSelezionabili)
+                {
+                    <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="CategorieSelezionate" value="@categoria.Value" id="@categoria.Text">
+                    <label class="form-check-label" for="@categoria.Text">
+                            @categoria.Text
+                        </label>
+                    </div>
+                }
+
+            </div>
+        
+        <span asp-validation-for="Foto.Categorie" class="text-danger"></span>
+
+
+        <div class="form-group p-2">
+            <input type="submit" value="Create" class="btn btn-danger btn-lg p-2 m-2" />
+        </div>
+    </form>
+
+</div>
