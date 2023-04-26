@@ -15,20 +15,24 @@
 
     <div>
         <p>
-            Categoria:
+            Categorie:
 
         </p>
-      @*  <p class="text-red">
+        <p class="text-red">
             @if (foto.Categorie != null)
             {
-                @foto.Categorie
-            }
+                @foreach (Categoria categoria in foto.Categorie)
+                {
+                    @categoria.Name;
+                    
+                }
+     
+            } 
             else
-            {
-                <span>Nessuna Categoria</span>
-            }
-
-        </p>*@
+             {
+                    <span>Nessuna Categoria</span>
+             }
+        </p>
     
     </div>
 

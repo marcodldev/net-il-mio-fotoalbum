@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
  /* color: black;*/
 }
@@ -17,4 +17,30 @@ html {
 body {
     margin-bottom: 60px;
     color:  black !important;
+}
+
+.show{
+    display:block;
+}
+
+.hide{
+    display:none;
+}
+
+﻿#fotos-table,
+#no-fotos,
+#fotos-filter {
+    display: none;
+}
+
+#fotos-table.show {
+    display: table;
+}
+
+:is(#no-fotos, #fotos-filter).show {
+    display: block;
+}
+
+#fotos-loader.hide {
+    display: none;
 }

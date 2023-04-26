@@ -1,0 +1,36 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<h2>Le mie foto</h2>
+
+<p id="fotos-loader">Sto caricando le foto...</p>
+
+<p id="no-fotos">Nessuna foto presente :</p>
+
+<div id="fotos-filter">
+    <div class="form-field m-2">
+        <label>Filtro titolo</label>
+        <input placeholder="filter" />
+    </div>
+</div>
+
+<div class="">
+    <div class="">
+        
+        <div id="fotos-table" class=" ">
+
+            <div id="fotos" class="row row-cols-1 row-cols-md-2"></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+    {
+    <script>
+
+        loadFotos();
+        initFilter();
+    </script>
+}

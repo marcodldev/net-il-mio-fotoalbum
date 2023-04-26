@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -28,6 +29,13 @@ namespace net_il_mio_fotoalbum.Controllers
             return View(fotos);
         }
 
+        public IActionResult IndexApi()
+        {
+
+            return View();
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
@@ -42,7 +50,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
         //SHOW
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult Show(int Id)
         {
@@ -65,7 +73,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
         //_______________________ CREATE  ________________________\\
 
-        //[Authorize(Roles = "ADMIN")]
+        [Authorize]
         [HttpGet]
         public IActionResult Create()
         {
@@ -96,7 +104,7 @@ namespace net_il_mio_fotoalbum.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(FotoFormModel formData)
@@ -159,7 +167,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
 
 
-        //[Authorize(Roles = "ADMIN")]
+        [Authorize]
         [HttpGet]
         public IActionResult Update(int Id)
         {
@@ -197,7 +205,7 @@ namespace net_il_mio_fotoalbum.Controllers
         }
 
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(int Id, FotoFormModel form)
@@ -264,7 +272,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
         //_______________________ DELETE  ________________________\\
 
-
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int Id)
