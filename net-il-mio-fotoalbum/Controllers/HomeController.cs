@@ -50,7 +50,6 @@ namespace net_il_mio_fotoalbum.Controllers
 
         //SHOW
 
-        [Authorize]
         [HttpGet]
         public IActionResult Show(int Id)
         {

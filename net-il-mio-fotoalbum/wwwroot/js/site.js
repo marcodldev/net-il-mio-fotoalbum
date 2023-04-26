@@ -21,10 +21,14 @@ const fotoComponent = foto => `
             <div class="col ">
                 <div class="card">
                     <img src="${foto.url}" class="card-img-top" alt="${foto.title}">
-                    <div class="card-body">
-                        <h5 class="card-name">${foto.title}</h5>
-                        <p class="card-text">${foto.description}</p>
+                    <div class="card-body d-flex justify-content-between">
+                        <span class="">
+                            <h5 class="card-name">${foto.title}</h5>
+                            <p class="card-text">${foto.description}</p>
+                        </span>
+                        <a class="btn btn-primary btn-lg" href="Home/Show/${foto.id}">Dettagli</a>
                     </div>
+                        
                 </div>
             </div>`; 
 
