@@ -11,6 +11,8 @@ namespace net_il_mio_fotoalbum.Models
 
         public DbSet<Categoria> Categorie { get; set; }
 
+        public DbSet<Messaggio> CentroMessaggi { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source = localhost; Initial Catalog = foto_db; Integrated Security = True; TrustServerCertificate=True");

@@ -33,6 +33,8 @@ const fotoComponent = foto => `
             </div>`; 
 
 
+
+
 const renderFotos = fotos => {
     const noFotos = document.querySelector("#no-fotos");
     const loader = document.querySelector("#fotos-loader");
@@ -57,3 +59,39 @@ const initFilter = () => {
     filter.addEventListener("input", (e) => loadFotos(e.target.value))
 };
 
+
+
+//______________________FORM__________________\\
+
+const renderForm = form => {
+    const formTable = document.querySelector("#form-messaggi");
+    formTable.innerHTML = form.map(formTable).join('');
+}
+
+const formComponent = form => `
+
+    <form id="mex-create-form">
+        <div class="mb-3">
+            <label for="${mex.Email}" class="form-label">Email</label>
+            <input type="email" class="form-control" id="${mex.Email}" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="${mex.TestoMessaggio}" class="form-label">Messaggio</label>
+            <input type="text" class="form-control" id="${mex.TestoMessaggio}">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+`;
+
+const initCreateForm = () => {
+    const form = document.querySelector("#mex-create-form");
+
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        const mex = getMessaggioFromForm(form);
+        postMessaggio(mex);
+    });
+};

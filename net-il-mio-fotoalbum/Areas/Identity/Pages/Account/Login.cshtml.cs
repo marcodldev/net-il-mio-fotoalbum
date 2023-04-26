@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using net_il_mio_fotoalbum.Controllers;
 
 namespace net_il_mio_fotoalbum.Areas.Identity.Pages.Account
 {

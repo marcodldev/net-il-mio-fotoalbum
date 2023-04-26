@@ -6,7 +6,7 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Gestisci le tue foto</h1>
     
    
 </div>
@@ -27,12 +27,24 @@
             <div class="col">
                 <div class="card">
                     <img src="@foto.Url" class="card-img-top" alt="@foto.Title">
-                    <div class="card-body">
-                        <h5 class="card-name">@foto.Title</h5>
-                        <p class="card-text">@foto.Description</p>
-                        <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Home", new{Id = @foto.Id})">Dettagli</a>
+                    <div class="d-flex">
+                        <div class="card-body">
+                            <h5 class="card-name">@foto.Title</h5>
+                            <p class="card-text">@foto.Description</p>
+                            <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Home", new{Id = @foto.Id})">Dettagli</a>
 
-                    </div>
+                        </div>
+                        <div class="align-end">
+                            @if (@foto.Visible)
+                            {
+                                <h1>Visibile: <span class="btn btn-success btn-lg">Sì</span> </h1>
+                            }
+                            else
+                            {
+                                <h1>Visibile: <span class="btn btn-warning btn-lg">No</span> </h1>
+                            }
+                        </div>
+                    </div>                  
                 </div>
             </div>
         }

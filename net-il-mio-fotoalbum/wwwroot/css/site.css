@@ -44,3 +44,7 @@ body {
 #fotos-loader.hide {
     display: none;
 }
+
+.align-end{
+    align-self: end;
+}

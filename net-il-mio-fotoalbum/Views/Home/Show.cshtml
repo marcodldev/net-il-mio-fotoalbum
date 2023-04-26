@@ -7,9 +7,9 @@
 
 <div>
 
-    <img src="@foto.Url" class="card-img-top" alt="@foto.Title">
+    <h1 class="p-3 text-center">@foto.Title</h1>
 
-    <div class="p-3"><p>Nome: @foto.Title</p></div>
+    <img src="@foto.Url" class="card-img-top" alt="@foto.Title">
 
     <div class="p-1"><p>Descrizione: @foto.Description</p></div>
 
@@ -55,16 +55,7 @@
             <a class="btn btn-danger btn-lg" href="@Url.Action("Update","Home", new{Id = @foto.Id})">Modifica</a>
         </div>
 
-        <div class="p-3">
-            @if (@foto.Visible)
-            {
-                <h1 class="btn btn-danger btn-lg">Visibile: Sì</h1>
-            }
-            else
-            {
-                <h1 class=" btn-danger btn-lg">Visibile: No</h1>
-            }
-        </div>
+ 
 
     }
 </div>
