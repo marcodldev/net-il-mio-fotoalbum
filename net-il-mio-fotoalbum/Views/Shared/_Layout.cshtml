@@ -20,14 +20,28 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 justify-content-between">
+                        <div class="d-flex">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="IndexApi">Home</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" aria-current="page" href="@Url.Action("Index","User")">Admin</a>
-                        </li>
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Admin</a>
+                            </li>
+
+
+                            }
+                        </div>
+
+
+                        @*                      <li>
+                        <a class="nav-link text-dark" aria-current="page" href="@Url.Action("Index","User")">Admin</a>
+                        </li>*@
                         <partial name="_LoginPartial" />
+
                     </ul>
                 </div>
             </div>

@@ -13,5 +13,7 @@ namespace net_il_mio_fotoalbum.Models
 
         public List<SelectListItem>? CategorieSelezionabili{ get; set; }
         public List<string>? CategorieSelezionate { get; set; }
+
+        public Categoria? CategoriaInGestione { get; set; }
     }
 }

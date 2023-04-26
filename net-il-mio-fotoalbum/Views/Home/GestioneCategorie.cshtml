@@ -1,0 +1,40 @@
+﻿@model FotoFormModel
+@{
+    Layout = "_Layout";
+
+}
+
+<h2>Categorie disponibili:</h2>
+<ul>
+    @foreach (SelectListItem categoria in Model.CategorieSelezionabili)
+    {
+        <li class="d-flex justify-content-between p-2">
+                @categoria.Text
+            <form asp-controller="Home" asp-action="EliminaCategoria" asp-route-id="@Convert.ToInt32(categoria.Value)" method="post">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger btn-lg">
+                    Elimina
+                </button>
+
+            </form>
+        </li>
+
+    }
+</ul>
+
+<h2>Crea nuova categoria</h2>
+
+<form asp-controller="Home" asp-action="AggiungiCategoria" method="post">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group p-2">
+        <label asp-for="CategoriaInGestione.Name" class="control-label ">Nome</label>
+        <input asp-for="CategoriaInGestione.Name" class="form-control " />
+        <span asp-validation-for="CategoriaInGestione.Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group p-2">
+        <input type="submit" value="Create" class="btn btn-danger btn-lg p-2 m-2" />
+    </div>
+</form>
+

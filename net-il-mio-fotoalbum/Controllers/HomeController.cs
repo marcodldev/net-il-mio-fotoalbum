@@ -293,5 +293,91 @@ namespace net_il_mio_fotoalbum.Controllers
                 }
             }
         }
+
+
+
+        //_______________________ GESTIONE CATEGORIE  ________________________\\
+
+
+        //_______________________ CREA NUOVA CATEGORIA  ________________________\\
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult GestioneCategorie()
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+                List<Categoria> categorie = ctx.Categorie.ToList();
+                List<SelectListItem> listCategorie = new List<SelectListItem>();
+
+                foreach (Categoria categoria in categorie)
+                {
+                    listCategorie.Add(new SelectListItem()
+                    {
+                        Text = categoria.Name,
+                        Value = categoria.Id.ToString()
+                    });
+                }
+
+
+                FotoFormModel formData = new FotoFormModel();
+       
+
+                formData.CategorieSelezionabili = listCategorie;
+
+                return View("GestioneCategorie", formData);
+
+            }
+        }
+        
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AggiungiCategoria(FotoFormModel data)
+        {
+
+            if (!ModelState.IsValid)
+            {
+   
+               return GestioneCategorie();             
+            }
+
+            using (FotoContext ctx = new FotoContext())
+            {
+
+                Categoria nuovaCategoria = new Categoria();
+                nuovaCategoria.Name = data.CategoriaInGestione.Name;
+
+
+                ctx.Categorie.Add(nuovaCategoria);
+                ctx.SaveChanges();
+
+                return RedirectToAction("GestioneCategorie");
+            }
+        }
+
+        //_______________________ ELIMINA CATEGORIA  ________________________\\
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EliminaCategoria(int Id)
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+                Categoria CategoriaDelete = ctx.Categorie.Where(c => c.Id == Id).FirstOrDefault();
+
+                if (CategoriaDelete != null)
+                {
+                    ctx.Categorie.Remove(CategoriaDelete);
+                    ctx.SaveChanges();
+                    return RedirectToAction("GestioneCategorie");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
     }
 }

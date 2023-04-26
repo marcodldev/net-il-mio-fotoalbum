@@ -47,9 +47,12 @@
             }
 
         </div>
+
+        <h2>Vuoi rendere pubblica la foto?</h2>
+
         <div class="form-check">
-            <input asp-for="Foto.Visible" type="checkbox" value="true" class="form-check-input" id="flexCheckDefault" />
-            <label asp-for="Foto.Visible" class="form-check-label" >Mostra</label>
+            <input asp-for="Foto.Visible" type="checkbox" value="@Model.Foto.Visible" class="form-check-input" id="flexCheckDefault" />
+            <label asp-for="Foto.Visible" class="form-check-label" >Mostra Foto</label>
         </div>
         <div class="error">
             <span asp-validation-for="Foto.Visible" class="text-black error"></span>
