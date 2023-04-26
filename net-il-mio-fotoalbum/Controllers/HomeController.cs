@@ -173,7 +173,8 @@ namespace net_il_mio_fotoalbum.Controllers
         {
             using (FotoContext ctx = new FotoContext())
             {
-                Foto fotoEdit = ctx.Fotos.Include(p => p.Categorie).Where(foto => foto.Id == Id).FirstOrDefault();
+                Foto fotoEdit = ctx.Fotos.Include(p => p.Categorie)
+                    .Where(foto => foto.Id == Id).FirstOrDefault();
 
                 if (fotoEdit == null)
                 {
@@ -245,6 +246,7 @@ namespace net_il_mio_fotoalbum.Controllers
                     fotoEdit.Title = form.Foto.Title;
                     fotoEdit.Description = form.Foto.Description;
                     fotoEdit.Url = url + form.Foto.Url;
+                    fotoEdit.Visible = form.Foto.Visible;
 
                     fotoEdit.Categorie.Clear();
 
