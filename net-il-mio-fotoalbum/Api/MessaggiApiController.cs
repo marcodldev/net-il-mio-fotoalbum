@@ -39,7 +39,7 @@ namespace net_il_mio_fotoalbum.Api
             return Ok(mex);
         }
 
-        //____________________Put Messaggio___________________\\
+        //____________________Show Messaggio___________________\\
 
         [HttpGet("{id}")]
         public IActionResult GetMessaggio(int id)
@@ -53,25 +53,6 @@ namespace net_il_mio_fotoalbum.Api
             }
 
             return Ok(mex);
-        }
-
-
-        [HttpPut("{id}")]
-        public IActionResult PutMessaggio(int id, [FromBody] Messaggio mex)
-        {
-            var mexSalvato = _context.CentroMessaggi.FirstOrDefault(m => m.Id == id);
-
-            if (mexSalvato is null)
-            {
-                return NotFound();
-            }
-
-            mexSalvato.Email = mex.Email;
-            mexSalvato.TestoMessaggio = mex.TestoMessaggio;
- 
-            _context.SaveChanges();
-
-            return Ok();
         }
 
         //____________________Elimina Messaggio___________________\\

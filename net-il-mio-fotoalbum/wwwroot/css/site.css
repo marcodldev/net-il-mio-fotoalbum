@@ -48,3 +48,7 @@ body {
 .align-end{
     align-self: end;
 }
+
+.customNav {
+    box-shadow: 13px -20px 18px 18px black;
+}

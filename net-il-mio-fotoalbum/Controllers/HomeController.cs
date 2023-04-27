@@ -18,13 +18,20 @@ namespace net_il_mio_fotoalbum.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string searchString)
         {
             using var ctx = new FotoContext();
-             
 
-            var fotos = ctx.Fotos.ToArray();
+            var query = ctx.Fotos.AsQueryable();
 
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(f => f.Title.ToLower().Contains(searchString.ToLower()));
+            }
+
+            var fotos = query.ToArray();
+
+            ViewBag.SearchString = searchString;
 
             return View(fotos);
         }

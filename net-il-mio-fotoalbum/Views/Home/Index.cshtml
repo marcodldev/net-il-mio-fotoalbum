@@ -3,10 +3,11 @@
     ViewData["Title"] = "Home Page";
 
      var fotos = Model;
+    var searchString = ViewBag.SearchString;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Gestisci le tue foto</h1>
+    <h1 class="display-4 my-1">Amministra la tua galleria</h1>
     
    
 </div>
@@ -17,6 +18,18 @@
     <a class="btn btn-danger btn-lg p-2 m-4" href="@Url.Action("GestioneCategorie","Home")">Gestisci categorie</a>
 </div>
 
+<div class="p-2">
+    <form method="get">
+        <label for="searchInput"><h3>Cerca per titolo:</h3></label>
+        <div class="form-group d-flex py-2">
+            
+            <input type="text" class="form-control w-25 " id="searchInput" name="searchString" placeholder="Inserisci il titolo della foto da cercare" value="@searchString">
+            <button type="submit" class="btn btn-danger mx-2">Cerca</button>
+        </div>
+       
+    </form>
+</div>
+
 
 <div>
 
@@ -24,29 +37,33 @@
     <div class="row row-cols-1 row-cols-md-2 g-4">
         @foreach (var foto in fotos)
         {
-            <div class="col">
-                <div class="card">
-                    <img src="@foto.Url" class="card-img-top" alt="@foto.Title">
-                    <div class="d-flex">
-                        <div class="card-body">
-                            <h5 class="card-name">@foto.Title</h5>
-                            <p class="card-text">@foto.Description</p>
-                            <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Home", new{Id = @foto.Id})">Dettagli</a>
+            @if (string.IsNullOrEmpty(searchString) || foto.Title.ToLower().Contains(searchString.ToLower()))
+            {
+                <div class="col">
+                    <div class="card">
+                        <img src="@foto.Url" class="card-img-top" alt="@foto.Title">
+                        <div class="d-flex">
+                            <div class="card-body">
+                                <h5 class="card-name">@foto.Title</h5>
+                                <p class="card-text">@foto.Description</p>
+                                <a class="btn btn-danger btn-lg" href="@Url.Action("Show","Home", new{Id = @foto.Id})">Dettagli</a>
 
-                        </div>
-                        <div class="align-end">
-                            @if (@foto.Visible)
-                            {
-                                <h1>Visibile: <span class="btn btn-success btn-lg">Sì</span> </h1>
-                            }
-                            else
-                            {
-                                <h1>Visibile: <span class="btn btn-warning btn-lg">No</span> </h1>
-                            }
-                        </div>
-                    </div>                  
+                            </div>
+                            <div class="align-end p-2">
+                                @if (@foto.Visible)
+                                {
+                                    <h3>Visibile: <span class="btn btn-success btn-lg">Sì</span> </h3>
+
+                                }
+                                else
+                                {
+                                    <h3>Visibile: <span class="btn btn-warning btn-lg">No</span> </h3>
+                                }
+                            </div>
+                        </div>                  
+                    </div>
                 </div>
-            </div>
+            }
         }
     </div>
 
