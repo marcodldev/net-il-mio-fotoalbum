@@ -10,6 +10,7 @@
     {
         <li class="d-flex justify-content-between p-2">
                 @categoria.Text
+
             <form asp-controller="Home" asp-action="EliminaCategoria" asp-route-id="@Convert.ToInt32(categoria.Value)" method="post">
                 @Html.AntiForgeryToken()
                 <button type="submit" class="btn btn-danger btn-lg">

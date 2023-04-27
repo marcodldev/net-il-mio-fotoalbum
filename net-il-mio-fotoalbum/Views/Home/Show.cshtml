@@ -42,13 +42,37 @@
    @if (User.Identity.IsAuthenticated)
     {
         <div class="p-3">
-            <form asp-controller="Home" asp-action="Delete" asp-route-id="@foto.Id" method="post">
-                @Html.AntiForgeryToken()
-                <button type="submit" class="btn btn-danger btn-lg">
-                    Elimina
-                </button>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Elimina
+            </button>
 
-            </form>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Sei sicuro?</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Stai per eliminare la foto, non potrai più recuperarla.</p>
+
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Tieni la foto</button>
+                            <form asp-controller="Home" asp-action="Delete" asp-route-id="@foto.Id" method="post">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger btn-lg">
+                                    Elimina la foto
+                                </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="p-3">

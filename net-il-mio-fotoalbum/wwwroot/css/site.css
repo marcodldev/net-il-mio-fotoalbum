@@ -50,5 +50,9 @@ body {
 }
 
 .customNav {
-    box-shadow: 13px -20px 18px 18px black;
+    box-shadow: 0px 17px 20px 16px #731ed0fc;
+}
+
+.background-color {
+    background-color: mediumpurple;
 }
