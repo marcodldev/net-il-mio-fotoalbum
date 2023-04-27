@@ -1,0 +1,51 @@
+﻿@model Messaggio[]
+@{
+
+    Layout = "_Layout";
+
+    var messaggi = Model;
+}
+<div class="text-center p-3">
+    <h1 class="display-4 my-1">Centro Messaggi</h1>
+
+
+</div>
+
+@if(messaggi.Length > 0)
+{
+    <table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">Messaggio</th>
+            <th scope="col">Azioni</th>
+        </tr>
+    </thead>
+    <tbody>
+          @foreach (var messaggio in messaggi)
+        {
+            <tr>
+                <th scope="row">@messaggio.Id</th>
+                <td >@messaggio.Email</td>
+                <td class ="overflow-hidden">
+                    @messaggio.TestoMessaggio</td>
+                <td class="d-flex">
+                    <a class="btn btn-primary btn-lg mx-2" href="@Url.Action("ShowMessaggio","Home", new{Id = @messaggio.Id})">Dettagli</a>
+                    <form asp-controller="Home" asp-action="EliminaMessaggio" asp-route-id="@messaggio.Id" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            Elimina
+                        </button>
+
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    </table>
+}
+else
+{
+    <h1 class="text-center">Non hai ricevuto alcun messaggio</h1>
+}

@@ -387,5 +387,66 @@ namespace net_il_mio_fotoalbum.Controllers
                 }
             }
         }
+
+        //_______________________ CENTRO MESSAGGI  ________________________\\
+
+
+        public IActionResult CentroMessaggi()
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+
+                var messaggi = ctx.CentroMessaggi.ToArray();
+
+
+                return View(messaggi);
+            } 
+      
+        }
+
+        //ELIMINA
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult EliminaMessaggio(int Id)
+        {
+            using (FotoContext ctx = new FotoContext())
+            {
+                Messaggio MessaggioDelete = ctx.CentroMessaggi.Where(c => c.Id == Id).FirstOrDefault();
+
+                if (MessaggioDelete != null)
+                {
+                    ctx.CentroMessaggi.Remove(MessaggioDelete);
+                    ctx.SaveChanges();
+                    return RedirectToAction("CentroMessaggi");
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+        }
+
+        //SHOW
+
+        [HttpGet]
+        public IActionResult ShowMessaggio(int Id)
+        {
+            using var ctx = new FotoContext();
+
+
+
+            Messaggio MessaggioShow = ctx.CentroMessaggi.Where(m => m.Id == Id)
+                .FirstOrDefault();
+
+            if (MessaggioShow == null)
+            {
+                return NotFound($"messaggio {Id} non trovato");
+            }
+
+            return View(MessaggioShow);
+        }
+
+
     }
 }

@@ -8,10 +8,39 @@
 
 <p id="no-fotos">Nessuna foto presente :</p>
 
-<div id="fotos-filter">
+<div id="fotos-filter" class="d-flex justify-content-between">
     <div class="form-field m-2">
         <label class="p-1"><h3>Cerca per titolo</h3></label>
-        <input class="form-control w-25" placeholder="Titolo" />
+        <input class="form-control w-100" placeholder="Titolo" />
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Invia un messaggio!</button>
+
+        <div class="offcanvas offcanvas-end w-25" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasRightLabel">Inviaci un messaggio!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="form-messaggi " class="p-5">
+                    <h1 class="text-center">Inviaci un messaggio!</h1>
+
+                    <form id="mex-create-form">
+                        <div class="mb-3">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Messaggio" class="form-label">Messaggio</label>
+                            <textarea type="text" class="form-control" id="Messaggio"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Invia</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -27,22 +56,9 @@
 
 
 
-<h1 class="text-center">Inviaci un messaggio!</h1>
 
-<div id="form-messaggi">
-    <form id="mex-create-form">
-        <div class="mb-3">
-            <label for="Email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-            <label for="Messaggio" class="form-label">Messaggio</label>
-            <input type="text" class="form-control" id="Messaggio">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+
+
 
 @section Scripts
     {
